@@ -1,7 +1,16 @@
 def find_duplicate(nums):
-    """
-    Given a list of n + 1 integers between 1 and n, find one of the duplicates.
-    If there are multiple possible answers, return one of the duplicates.
-    If there is no duplicate, return None.
-    """
-    pass
+    if (
+        not nums
+        or any(not isinstance(num, int) for num in nums)
+        or len(nums) < 2
+        or any(num <= 0 for num in nums)
+    ):
+        return False
+
+    nums.sort()
+
+    for i in range(1, len(nums)):
+        if nums[i] == nums[i - 1]:
+            return nums[i]
+
+    return False

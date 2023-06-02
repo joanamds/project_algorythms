@@ -39,7 +39,7 @@ def merge_sort(string):
 def is_anagram(first_string, second_string):
     """Verifica se duas strings são anagramas."""
     if not first_string or not second_string:
-        return first_string, second_string, False
+        return False
 
     if len(first_string) == 0 or len(second_string) == 0:
         return False
@@ -50,4 +50,4 @@ def is_anagram(first_string, second_string):
     first_list = merge_sort(fs)
     second_list = merge_sort(ss)
 
-    return "".join(first_list), "".join(second_list), first_list == second_list
+    return fs == ss

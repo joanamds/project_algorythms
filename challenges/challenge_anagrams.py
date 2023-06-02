@@ -1,37 +1,46 @@
 def is_anagram(first_string, second_string):
     """Verifica se duas strings são anagramas."""
-    if not first_string or not second_string:
+    if (
+        not isinstance(first_string, str)
+        or not isinstance(second_string, str)
+    ):
         return first_string, second_string, False
 
-    if len(first_string) == 0 or len(second_string) == 0:
-        return False
+    if first_string == "" and second_string == "":
+        return first_string, second_string, False
 
-    fs = first_string.lower()
-    ss = second_string.lower()
+    fs = first_string.lower() if first_string else ""
+    ss = second_string.lower() if second_string else ""
 
-    first_list = merge_sort(fs)
-    second_list = merge_sort(ss)
+    ordered_first_string = "".join(merge_sort(list(fs)))
+    ordered_second_string = "".join(merge_sort(list(ss)))
 
-    return "".join(first_list), "".join(second_list), first_list == second_list
+    return (
+        ordered_first_string,
+        ordered_second_string,
+        ordered_first_string == ordered_second_string,
+    )
 
 
-def merge_sort(string):
-    if len(string) <= 1:
-        return string
+def merge_sort(lst):
+    """Ordena uma lista."""
+    if len(lst) <= 1:
+        return lst
 
-    middle = len(string) // 2
-    left = merge_sort(string[:middle])
-    right = merge_sort(string[middle:])
+    middle = len(lst) // 2
+    left = merge_sort(lst[:middle])
+    right = merge_sort(lst[middle:])
 
     return merge(left, right)
 
 
 def merge(left, right):
+    """Combina duas listas ordenadas em uma única lista ordenada."""
     merged = []
     i = j = 0
 
     while i < len(left) and j < len(right):
-        if left[i].lower() < right[j].lower():
+        if left[i] < right[j]:
             merged.append(left[i])
             i += 1
         else:
@@ -40,4 +49,4 @@ def merge(left, right):
 
     merged.extend(left[i:])
     merged.extend(right[j:])
-    return "".join(merged)
+    return merged

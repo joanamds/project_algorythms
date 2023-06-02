@@ -42,7 +42,7 @@ def is_anagram(first_string, second_string):
         return first_string, second_string, False
 
     if len(first_string) == 0 or len(second_string) == 0:
-        return first_string, second_string, False
+        return False
 
     fs = first_string.lower()
     ss = second_string.lower()
